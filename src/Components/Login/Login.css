@@ -1,0 +1,67 @@
+.loginParentDiv {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  margin: 30px;
+  padding: 30px;
+  border-radius: 8px;
+  border: #002f34 solid 1px;
+}
+.loginDiv img{
+  width: 100%;
+  border-radius: 5px;
+}
+.loginDiv label{
+  margin-bottom: 10px;
+}
+.loginDiv .input {
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  outline-color: transparent;
+  padding: 8px 20px;
+  width: 100%;
+}
+
+.loginParentDiv button {
+  width: 100%;
+  height: 48px;
+  border-color: transparent;
+  background-color: #002f34;
+  color: whitesmoke;
+  font-weight: 900;
+}
+.loginParentDiv button:hover {
+  background-color: white;
+  color: #002f34;
+  border: 2px solid #002f34;
+}
+
+.loginParentDiv a {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+i{
+  cursor: pointer;
+  position: absolute;
+  bottom: 4px;
+  right: 1px;
+}
+
+.password_div{
+ position: relative;
+}
+.signup_link{
+  cursor: pointer;
+  color: blue;
+}
