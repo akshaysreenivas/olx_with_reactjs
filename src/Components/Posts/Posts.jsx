@@ -3,28 +3,27 @@ import Heart from "../../assets/Heart";
 import "./Post.css";
 import { collection, query, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebaseconfig";
-import { useEffect, useState,useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { postContext } from "../../Context/postdetails";
 
 function Posts() {
- const navigate= useNavigate()
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const q = query(collection(db, "products"));
     getDocs(q).then((querySnapshot) => {
       const productsData = querySnapshot.docs.map((doc) => {
-       return{
-        ...doc.data(),
-       id: doc.id
-       }
-      }
-      );
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
       setProducts(productsData);
     });
   }, []);
 
-const {setPost} = useContext(postContext);
+  const { setPost } = useContext(postContext);
   return (
     <div className="postParentDiv">
       <div className="moreView">
@@ -39,10 +38,14 @@ const {setPost} = useContext(postContext);
               const date = new Date(dateTimeString);
               const dateString = date.toLocaleDateString();
               return (
-                <div key={product.id} className="card" onClick={()=>{
-                  setPost(product)
-                  navigate("/view")
-                 }}>
+                <div
+                  key={product.id}
+                  className="card"
+                  onClick={() => {
+                    setPost(product);
+                    navigate("/view");
+                  }}
+                >
                   <div className="favorite">
                     <Heart></Heart>
                   </div>

@@ -134,7 +134,7 @@ const Create = () => {
         <small className="text-danger">{imageError}</small>
         <br />
         {loading ? (
-          <button className="uploadBtn  rounded">
+          <button  className="uploadBtn  rounded">
             <Spinner
               as="span"
               animation="border"
@@ -144,7 +144,7 @@ const Create = () => {
             />
           </button>
         ) : (
-          <button onClick={handleSubmit} className="uploadBtn  rounded">
+          <button onClick={handleSubmit}  className="uploadBtn  rounded">
             Submit
           </button>
         )}
