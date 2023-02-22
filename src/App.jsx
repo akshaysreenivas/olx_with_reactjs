@@ -9,6 +9,7 @@ import ViewPost from "./Pages/ViewPost";
 import Postdetails from "./Context/postdetails";
 import { AuthContext } from "./Context/Context";
 import { auth } from "./config/firebaseconfig";
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/view" element={<ViewPost />} />
         </Routes>
       </Postdetails>
+      <ToastContainer />
     </div>
   );
 }

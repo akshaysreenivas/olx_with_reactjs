@@ -6,6 +6,9 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebaseconfig";
 import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -13,9 +16,6 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [PasswordError, setPasswordError] = useState("");
-  const [NameError, setNameError] = useState("");
-  const [EmailError, setEmailError] = useState("");
   const [passwordType, setPasswordType] = useState("password");
   const [loading, setLoading] = useState(false);
 
@@ -28,30 +28,25 @@ export default function Signup() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPasswordError("");
-    setEmailError("");
-    setNameError("");
     if (!username || username.match(/^\s*$/)) {
-      setNameError("* username field required");
+      toast.error("username field required" ,{position:"top-center"})
       return;
     }
     if (!email || email.match(/^\s*$/)) {
-      setEmailError("* email field required");
+      toast.error("email field required" ,{position:"top-center"})
       return;
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setEmailError("Invalid email address");
+      toast.error("Invalid email address" ,{position:"top-center"})
       return;
     }
 
     if (!password || password.match(/^\s*$/)) {
-      setPasswordError("* Password field required");
+      toast.error("Password field required" ,{position:"top-center"})
       return;
     }
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      setPasswordError(
-        "password should contain at least one uppercase letter, one lowercase letter, one digit, and at least 8 characters"
-      );
+      toast.error("password should contain at least one uppercase letter, one lowercase letter, one digit, and at least 8 characters" ,{position:"top-center"})
       return;
     }
     setLoading(true);
@@ -73,13 +68,14 @@ export default function Signup() {
         // Handle sign-up errors
         const errorCode = error.code;
         if (errorCode === "auth/email-already-in-use") {
-          alert("email already exists");
+          toast.error("email already exists" ,{position:"top-center"})
         }
       });
   };
 
   return (
-    <div className="signupParentDiv">
+   <>
+   <div className="signupParentDiv">
       <div className="signupDiv">
         <img
           src="https://logodownload.org/wp-content/uploads/2016/10/olx-logo-2.png"
@@ -96,8 +92,6 @@ export default function Signup() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <small className="text-danger">{NameError}</small>
-
           <br />
           <label htmlFor="email">Email</label>
           <br />
@@ -109,7 +103,6 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             name="email"
           />
-          <small className="text-danger">{EmailError}</small>
 
           <br />
           <label htmlFor="phone">Phone</label>
@@ -136,15 +129,9 @@ export default function Signup() {
               name="password"
             />
             <i onClick={togglePassword}>
-              {passwordType === "password" ? (
-                <span className="material-icons"> visibility_off </span>
-              ) : (
-                <span className="material-icons"> visibility </span>
-              )}
+                <span className="material-icons">{passwordType ==="password" ? "visibility_off" : "visibility "}  </span>
             </i>
           </div>
-
-          <small className="text-danger">{PasswordError}</small>
           <br />
           <br />
           {loading ? (
@@ -169,5 +156,6 @@ export default function Signup() {
         </span>
       </div>
     </div>
+   </>
   );
 }

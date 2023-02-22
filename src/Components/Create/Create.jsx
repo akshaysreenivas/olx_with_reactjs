@@ -7,6 +7,7 @@ import { db } from "../../config/firebaseconfig";
 import { AuthContext } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import { toast } from "react-toastify";
 
 
 const Create = () => {
@@ -14,10 +15,6 @@ const Create = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState(null);
-  const [nameError, setNameError] = useState("");
-  const [categoryError, setCategoryError] = useState("");
-  const [priceError, setPriceError] = useState("");
-  const [imageError, setImageError] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const date = new Date().toISOString();
@@ -27,24 +24,20 @@ const Create = () => {
   // form submitting
 
   const handleSubmit = () => {
-    setCategoryError("");
-    setImageError("");
-    setNameError("");
-    setPriceError("");
     if (!name || name.match(/^\s*$/)) {
-      setNameError("* required");
+      toast.error("product name required",{position:"top-center"})
       return;
     }
     if (!category || category.match(/^\s*$/)) {
-      setCategoryError("* required");
+      toast.error("category required",{position:"top-center"})
       return;
     }
     if (!price || price.match(/^\s*$/)) {
-      setPriceError("* required");
+      toast.error("price field required",{position:"top-center"})
       return;
     }
     if (!image) {
-      setImageError("** Please select an image");
+      toast.error("please select image",{position:"top-center"})
       return;
     }
 
@@ -85,7 +78,6 @@ const Create = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <small className="text-danger">{nameError}</small>
         <br />
         <label htmlFor="category">Category</label>
         <br />
@@ -99,7 +91,6 @@ const Create = () => {
             onChange={(e) => setCategory(e.target.value)}
           />
         </div>
-        <small className="text-danger">{categoryError}</small>
         <br />
         <label htmlFor="price">Price</label>
         <br />
@@ -113,7 +104,6 @@ const Create = () => {
             value={price}
           />
         </div>
-        <small className="text-danger">{priceError}</small>
         <br />
         <br />
         {image ? (
@@ -131,7 +121,6 @@ const Create = () => {
         <div>
           <input onChange={(e) => setImage(e.target.files[0])} type="file" />
         </div>
-        <small className="text-danger">{imageError}</small>
         <br />
         {loading ? (
           <button  className="uploadBtn  rounded">
