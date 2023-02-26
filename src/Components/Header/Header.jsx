@@ -10,14 +10,13 @@ import { AuthContext } from "../../Context/Context";
 import { auth } from "../../config/firebaseconfig";
 
 function Header() {
-
   const navigate = useNavigate();
-  const { user} = useContext(AuthContext);
-  
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
-        <div className="brandName" onClick={()=>navigate("/")}>
+        <div className="brandName" onClick={() => navigate("/")}>
           <OlxLogo />
         </div>
         <div className="placeSearch">
@@ -43,16 +42,23 @@ function Header() {
         {user ? (
           <div className="control_links d-flex gap-3">
             <span>{user.displayName}</span>
-            <span onClick={() => auth.signOut().then(()=>navigate("/login"))}>logout</span>
+            <span onClick={() => auth.signOut().then(() => navigate("/login"))}>
+              logout
+            </span>
           </div>
         ) : (
-          <span className="control_links" onClick={() => navigate("/login")}>login</span>
+          <span className="control_links" onClick={() => navigate("/login")}>
+            login
+          </span>
         )}
-        <div className="sellMenu control_links" onClick={() => navigate(user ? "/sell" : "/login")}>
-        <SellButton></SellButton>
+        <div
+          className="sellMenu control_links"
+          onClick={() => navigate(user ? "/sell" : "/login")}
+        >
+          <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
-            <span >SELL</span>
+            <span>SELL</span>
           </div>
         </div>
       </div>

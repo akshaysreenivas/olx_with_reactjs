@@ -21,7 +21,7 @@ function View() {
       setSeller(sellerData);
       console.log("seller", seller);
     });
-  }, [seller,userId]);
+  }, [seller, userId]);
   return (
     <Fragment>
       <div className="viewParentDiv" key={post.id}>
@@ -41,7 +41,9 @@ function View() {
               <p>{seller.username}</p>
               <p>{seller.phone}</p>
             </div>
-          ) : "loading..."}
+          ) : (
+            "loading..."
+          )}
         </div>
       </div>
     </Fragment>

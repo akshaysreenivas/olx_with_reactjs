@@ -9,12 +9,10 @@ import ViewPost from "./Pages/ViewPost";
 import Postdetails from "./Context/postdetails";
 import { AuthContext } from "./Context/Context";
 import { auth } from "./config/firebaseconfig";
-import { ToastContainer } from 'react-toastify';
-
-
+import { ToastContainer } from "react-toastify";
 
 function App() {
-  const {  setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   useEffect(() => {
     auth.onAuthStateChanged((user) => setUser(user));
   });

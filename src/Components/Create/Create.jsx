@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import { toast } from "react-toastify";
 
-
 const Create = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -25,19 +24,19 @@ const Create = () => {
 
   const handleSubmit = () => {
     if (!name || name.match(/^\s*$/)) {
-      toast.error("product name required",{position:"top-center"})
+      toast.error("product name required", { position: "top-center" });
       return;
     }
     if (!category || category.match(/^\s*$/)) {
-      toast.error("category required",{position:"top-center"})
+      toast.error("category required", { position: "top-center" });
       return;
     }
     if (!price || price.match(/^\s*$/)) {
-      toast.error("price field required",{position:"top-center"})
+      toast.error("price field required", { position: "top-center" });
       return;
     }
     if (!image) {
-      toast.error("please select image",{position:"top-center"})
+      toast.error("please select image", { position: "top-center" });
       return;
     }
 
@@ -64,82 +63,81 @@ const Create = () => {
 
   return (
     <Fragment>
-    <div className="centerDiv">
-      <div className=" formDiv rounded">
-        <label htmlFor="fname">Name</label>
-        <br />
-        <div>
-          <input
-            className="input mb-2"
-            type="text"
-            id="fname"
-            name="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <br />
-        <label htmlFor="category">Category</label>
-        <br />
-        <div>
-          <input
-            className="input"
-            type="text"
-            id="category"
-            name="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-        </div>
-        <br />
-        <label htmlFor="price">Price</label>
-        <br />
-        <div>
-          <input
-            onChange={(e) => setPrice(e.target.value)}
-            className="input"
-            type="number"
-            id="price"
-            name="Price"
-            value={price}
-          />
-        </div>
-        <br />
-        <br />
-        {image ? (
-          <img
-            alt="Posts"
-            width="200px"
-            height="200px"
-            src={image ? URL.createObjectURL(image) : ""}
-          ></img>
-        ) : (
-          ""
-        )}
-
-        <br />
-        <div>
-          <input onChange={(e) => setImage(e.target.files[0])} type="file" />
-        </div>
-        <br />
-        {loading ? (
-          <button  className="uploadBtn  rounded">
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
+      <div className="centerDiv">
+        <div className=" formDiv rounded">
+          <label htmlFor="fname">Name</label>
+          <br />
+          <div>
+            <input
+              className="input mb-2"
+              type="text"
+              id="fname"
+              name="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-          </button>
-        ) : (
-          <button onClick={handleSubmit}  className="uploadBtn  rounded">
-            Submit
-          </button>
-        )}
-      </div>
-      </div>
+          </div>
+          <br />
+          <label htmlFor="category">Category</label>
+          <br />
+          <div>
+            <input
+              className="input"
+              type="text"
+              id="category"
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
+          <br />
+          <label htmlFor="price">Price</label>
+          <br />
+          <div>
+            <input
+              onChange={(e) => setPrice(e.target.value)}
+              className="input"
+              type="number"
+              id="price"
+              name="Price"
+              value={price}
+            />
+          </div>
+          <br />
+          <br />
+          {image ? (
+            <img
+              alt="Posts"
+              width="200px"
+              height="200px"
+              src={image ? URL.createObjectURL(image) : ""}
+            ></img>
+          ) : (
+            ""
+          )}
 
+          <br />
+          <div>
+            <input onChange={(e) => setImage(e.target.files[0])} type="file" />
+          </div>
+          <br />
+          {loading ? (
+            <button className="uploadBtn  rounded">
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </button>
+          ) : (
+            <button onClick={handleSubmit} className="uploadBtn  rounded">
+              Submit
+            </button>
+          )}
+        </div>
+      </div>
     </Fragment>
   );
 };
